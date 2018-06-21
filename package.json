@@ -1,0 +1,16 @@
+{
+  "name": "testing_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "filesystem.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^6.0.1",
+    "walk": "^2.3.13",
+    "yargs": "^11.0.0"
+  }
+}
