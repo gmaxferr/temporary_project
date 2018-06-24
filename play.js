@@ -43,3 +43,11 @@
 
 // console.log(a.includes('4'));
 // console.log(a.includes('1'));
+
+a = [{n: "1", c: "2"}, {n: "8", c: "3756754"}, {n: "453", c: "5"}];
+
+
+for(item in a){
+    console.log(a[item]);
+}
+// a.forEach((item)=>{console.log(item)})

@@ -1,9 +1,9 @@
 {
-    "folderPatch": "../../To/ACC",
-    "folderDeps": "../../MyDeps",
-    "depsLogFile": "./deps.json",
-    "patchLogFile": "./patch_deps_found.json",
-    "crossLogFile": "./cross_deps.json",
+    "folderPatch": "..\\To\\ACC",
+    "folderDeps": "..\\MyDLLs",
+    "depsLogFile": ".\\deps.json",
+    "patchLogFile": ".\\patch_deps_found.json",
+    "crossLogFile": ".\\cross_deps.json",
     "extensions": [
         "txt",
         "txt2"

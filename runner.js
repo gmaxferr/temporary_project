@@ -16,6 +16,10 @@ const argv = yargs
             demand: true,
             alias: 't',
             string: true
+        },
+        p: {
+            descrive: "Force Override at inicial copy",
+            demand: false,
         }
     })
     .help().alias('help', 'h')
@@ -24,34 +28,43 @@ const argv = yargs
 var COPY_FROM = argv.from;
 var COPY_TO = argv.to;
 
-console.log(COPY_FROM)
-console.log(COPY_TO)
-
 var valid_From = false;
-valid_From= fse.pathExistsSync(COPY_FROM);
+valid_From = fse.pathExistsSync(COPY_FROM);
 
 var valid_To = false;
 valid_To = fse.pathExistsSync(COPY_TO)
-console.log(valid_To);
-console.log(valid_From);
+
+var force_override = false;
+if(argv.p){
+    console.log("Force Override!")
+    force_override = true;
+}
 
 if (valid_From && valid_To) {
+    console.log(`From: '${COPY_FROM}'`)
+    console.log(`To:   '${COPY_TO}'`)
 
-    fse.copy(COPY_FROM, COPY_TO, { overwrite: false })
+
+    fse.copy(COPY_FROM, COPY_TO, {
+            overwrite: force_override
+        })
         .then(() => {
             console.log('Folder copied!')
 
             handler.handle().then((results) => {
                 console.log('Files handled')
 
-                results.cross_patch_deps.forEach(dep => {
-                    fse.copySync(`${deps_folder}\\${dep.name}` // From
-                        , dep.path // To
-                        , { overwrite: false } // Override existing files
+                var deps = results.cross_patch_deps;
+                for(i in deps){
+                    fse.copySync(`${results.deps_folder}\\${deps[i].name}` // From
+                        , deps[i].path // To
+                        , {
+                            overwrite: true
+                        } // Override existing files
                         , (error) => { // Error catch function
                             console.log(error)
                         });
-                });
+                }
 
             }).catch(err => {
                 console.error(err)
