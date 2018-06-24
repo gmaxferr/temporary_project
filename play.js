@@ -44,10 +44,29 @@
 // console.log(a.includes('4'));
 // console.log(a.includes('1'));
 
-a = [{n: "1", c: "2"}, {n: "8", c: "3756754"}, {n: "453", c: "5"}];
+// a = [{n: "1", c: "2"}, {n: "8", c: "3756754"}, {n: "453", c: "5"}];
 
 
-for(item in a){
-    console.log(a[item]);
-}
+// for(item in a){
+//     console.log(a[item]);
+// }
 // a.forEach((item)=>{console.log(item)})
+
+
+// const readline = require('readline');
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+
+// rl.question('Start Patch executable? (Y|n) ', (answer) => {
+//   if(!answer){
+//       //start exe
+//   }else{
+//       //don't start
+//   }
+
+//   rl.close();
+// });
+

@@ -1,5 +1,8 @@
 const fse = require('fs-extra');
-const yargs = require("yargs");
+const yargs = require('yargs');
+const readline = require('readline');
+var exec = require('child_process').execFile;
+
 
 const handler = require('./fileHandler.js')
 
@@ -34,8 +37,13 @@ valid_From = fse.pathExistsSync(COPY_FROM);
 var valid_To = false;
 valid_To = fse.pathExistsSync(COPY_TO)
 
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 var force_override = false;
-if(argv.p){
+if (argv.p) {
     console.log("Force Override!")
     force_override = true;
 }
@@ -55,7 +63,7 @@ if (valid_From && valid_To) {
                 console.log('Files handled')
 
                 var deps = results.cross_patch_deps;
-                for(i in deps){
+                for (i in deps) {
                     fse.copySync(`${results.deps_folder}\\${deps[i].name}` // From
                         , deps[i].path // To
                         , {
@@ -65,6 +73,23 @@ if (valid_From && valid_To) {
                             console.log(error)
                         });
                 }
+
+
+                rl.question('Start Patch executable? (y|N) ', (answer) => {
+                    console.log(`answer: '${answer}'`)
+                    if(!answer || answer.toLowerCase() === "n"){
+                        //don't start
+                    }else if (answer.toLowerCase() === "y") {
+                        exec(`${results.patch_exec_path}`, function (err, data) {
+                            console.log(err)
+                            console.log(data.toString());
+                        });
+                    } 
+                    console.log('--- FINISHED! ---')
+                    rl.close();
+                });
+
+                
 
             }).catch(err => {
                 console.error(err)

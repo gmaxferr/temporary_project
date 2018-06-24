@@ -25,9 +25,11 @@ var fetchConfigs = () => {
         PATCH_ACC = result.folderPatch;
         FILTERING_EXTENSIONS = result.extensions;
         DEPS_FOLDER = result.folderDeps;
+        PATCH_EXEC_PATH = result.patch_executable_path;
 
         var valid = fse.pathExistsSync(DEPS_FILE) &&
             fse.pathExistsSync(PATCH_ACC) &&
+            fse.pathExistsSync(PATCH_EXEC_PATH) &&
             fse.pathExistsSync(DEPS_FOLDER);
 
         if (valid) {
@@ -159,7 +161,8 @@ var handle = () => {
                     my_deps: DEPS_FOUND,
                     deps_folder: DEPS_FOLDER,
                     patch_folder: PATCH_ACC,
-                    cross_patch_deps: aux._cross
+                    cross_patch_deps: aux._cross,
+                    patch_exec_path: PATCH_EXEC_PATH
                 });
             }
         }).catch((err) => {
